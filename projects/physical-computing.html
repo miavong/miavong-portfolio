@@ -14,10 +14,7 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    .cursor-dot { position: fixed; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s cubic-bezier(0.23,1,0.32,1), height 0.25s cubic-bezier(0.23,1,0.32,1), background 0.25s ease, border-color 0.25s ease; mix-blend-mode: difference; }
-    @media (pointer: coarse) { .cursor-dot { display: none; } }
-    body { background-color: #09090f; color: #f0f0f0; font-family: 'DM Sans', sans-serif; overflow-x: hidden; cursor: none; }
-    a, button, .sidebar-link, .back-link { cursor: none; }
+    body { background-color: #09090f; color: #f0f0f0; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
     body::before {
       content: '';
@@ -184,7 +181,7 @@
 
     /* Next */
     .next-project-wrap { display: flex; justify-content: center; padding: 48px 80px 60px; }
-    .next-project { position: relative; display: inline-block; border-radius: 999px; padding: 2px; background: #09090f; text-decoration: none; cursor: none; }
+    .next-project { position: relative; display: inline-block; border-radius: 999px; padding: 2px; background: #09090f; text-decoration: none; }
     .next-project-glow { position: absolute; inset: 0; overflow: hidden; border-radius: 999px; }
     .next-project-glow::before { content: ''; position: absolute; inset: 0; border-radius: 999px; background: conic-gradient(from 0deg, #f87171, #fbbf24, #34d399, #38bdf8, #818cf8, #c084fc, #f472b6, #f87171); opacity: 0.45; transition: opacity 0.5s ease; }
     .next-project:hover .next-project-glow::before { opacity: 1; }
@@ -242,7 +239,6 @@
   </style>
 </head>
 <body>
-  <div class="cursor-dot" id="cursor"></div>
 
   <nav>
     <div class="nav-pill">
@@ -580,13 +576,6 @@ SevSeg sevseg; <span class="code-comment">// Define a seven-segment display</spa
       });
     }, { rootMargin: '-20% 0px -70% 0px' });
     sections.forEach(s => s && obs.observe(s));
-
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    let cx = -100, cy = -100;
-    document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
-    function updateCursor() { cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px'; requestAnimationFrame(updateCursor); }
-    updateCursor();
 
     // GSAP scroll animations
     gsap.registerPlugin(ScrollTrigger);

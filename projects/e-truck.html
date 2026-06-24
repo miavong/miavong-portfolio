@@ -15,11 +15,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Custom cursor */
-    .cursor-dot { position: fixed; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s cubic-bezier(0.23,1,0.32,1), height 0.25s cubic-bezier(0.23,1,0.32,1), background 0.25s ease, border-color 0.25s ease; mix-blend-mode: difference; }
-    @media (pointer: coarse) { .cursor-dot { display: none; } }
-    body { background-color: #09090f; color: #f0f0f0; font-family: 'DM Sans', sans-serif; overflow-x: hidden; cursor: none; }
-    a, button, .sidebar-link, .back-link, .feature-item { cursor: none; }
+    body { background-color: #09090f; color: #f0f0f0; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
     body::before {
       content: '';
@@ -353,7 +349,6 @@
       position: relative; display: inline-block;
       border-radius: 999px; padding: 2px;
       background: #09090f; text-decoration: none;
-      cursor: none;
     }
     /* Rainbow border layer */
     .next-project-glow {
@@ -433,7 +428,6 @@
   </style>
 </head>
 <body>
-  <div class="cursor-dot" id="cursor"></div>
 
   <!-- Top nav -->
   <nav>
@@ -882,13 +876,6 @@
         if (target) target.classList.add('active');
       });
     });
-
-    // --- Custom cursor ---
-    const cursor = document.getElementById('cursor');
-    let cx = -100, cy = -100;
-    document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
-    function updateCursor() { cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px'; requestAnimationFrame(updateCursor); }
-    updateCursor();
 
     // --- Stat counter animation ---
     const statCounter = document.getElementById('stat-counter');
